@@ -20,29 +20,51 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="技术的高低不是取决于你C&#x2F;C++写得多么牛逼，而是取决于你掌握的资源有多少。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="liangkangnan的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="深入浅出RISC-V调试 Blue Liang，liangkangnan@163.com 2020-02-02 @ZhuHai ## 1.JTAG简介  目前RISC-V官方支持的调试方式是JTAG(Joint Test Action Group)，而ARM支持的调试方式有JTAG和SWD(Serial Wire Debug)这两种。 JTAG是一种国际标准的调试方式(IEEE1149.1)，而S">
+<meta property="og:type" content="article">
+<meta property="og:title" content="deep-in-riscv-debug">
+<meta property="og:url" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/index.html">
 <meta property="og:site_name" content="liangkangnan的博客">
-<meta property="og:description" content="技术的高低不是取决于你C&#x2F;C++写得多么牛逼，而是取决于你掌握的资源有多少。">
+<meta property="og:description" content="深入浅出RISC-V调试 Blue Liang，liangkangnan@163.com 2020-02-02 @ZhuHai ## 1.JTAG简介  目前RISC-V官方支持的调试方式是JTAG(Joint Test Action Group)，而ARM支持的调试方式有JTAG和SWD(Serial Wire Debug)这两种。 JTAG是一种国际标准的调试方式(IEEE1149.1)，而S">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/chain.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/TAP.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/system.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/DTM.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/idcode.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dtmcs.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dmi.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dm.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dmcontrol.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dmstatus.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/abstractcs.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/command.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/cmd0.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/arg_data.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/cmd1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/cmd2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/sbcs.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/openocd.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/jtag_sx.png">
+<meta property="article:published_time" content="2020-03-15T13:00:28.426Z">
+<meta property="article:modified_time" content="2020-03-15T13:03:18.700Z">
 <meta property="article:author" content="liangkangnan">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/chain.png">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2020/03/15/deep-in-riscv-debug/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false
+    isHome : false,
+    isPost : true
   };
 </script>
 
-  <title>liangkangnan的博客</title>
+  <title>deep-in-riscv-debug | liangkangnan的博客</title>
   
 
 
@@ -149,10 +171,10 @@
             
 
   <div class="posts-expand">
-        
+      
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/15/deep-in-riscv-debug/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -166,8 +188,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/15/deep-in-riscv-debug/" class="post-title-link" itemprop="url">deep-in-riscv-debug</a>
+          deep-in-riscv-debug
         </h1>
 
         <div class="post-meta">
@@ -182,6 +203,13 @@
             </span>
 
           
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
 
         </div>
       </header>
@@ -192,7 +220,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 align="center">深入浅出RISC-V调试</h1>
+        <h1 align="center">深入浅出RISC-V调试</h1>
 <h4 align="center">Blue Liang，liangkangnan@163.com</h4>
 <h4 align="center">2020-02-02 @ZhuHai</h4>
 ## 1.JTAG简介
@@ -441,152 +469,33 @@ JTAG内部有一个TAP(Test Access Port)控制器(或者说状态机)，通过TC
 <p>[2] 在STM32上模拟RISC-V JTAG的实现：<a href="https://gitee.com/liangkangnan/stm32_riscv_jtag_slave" target="_blank" rel="noopener">stm32_riscv_jtag_slave</a>。</p>
 <p>[3] 一个从零开始写的易懂的RISC-V处理器核：<a href="https://gitee.com/liangkangnan/tinyriscv" target="_blank" rel="noopener">tinyriscv</a>。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/first/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me.png">
-      <meta itemprop="name" content="liangkangnan">
-      <meta itemprop="description" content="技术的高低不是取决于你C/C++写得多么牛逼，而是取决于你掌握的资源有多少。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liangkangnan的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/14/first/" class="post-title-link" itemprop="url">first</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2020-03-14 11:18:24 / 修改时间：11:18:45" itemprop="dateCreated datePublished" datetime="2020-03-14T11:18:24+08:00">2020-03-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="None"><a href="#None" class="headerlink" title="None"></a>None</h1>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
         
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/14/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/me.png">
-      <meta itemprop="name" content="liangkangnan">
-      <meta itemprop="description" content="技术的高低不是取决于你C/C++写得多么牛逼，而是取决于你掌握的资源有多少。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="liangkangnan的博客">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/03/14/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-03-14 10:54:19" itemprop="dateCreated datePublished" datetime="2020-03-14T10:54:19+08:00">2020-03-14</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/14/first/" rel="prev" title="first">
+      <i class="fa fa-chevron-left"></i> first
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
   
 
   </div>
-
-  
-
 
 
           </div>
@@ -637,6 +546,7 @@ JTAG内部有一个TAP(Test Access Port)控制器(或者说状态机)，通过TC
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">深入浅出RISC-V调试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">Blue Liang，liangkangnan@163.com</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">1.0.0.2.</span> <span class="nav-text">2020-02-02 @ZhuHai</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.0.0.2.1.</span> <span class="nav-text">图1 一个JTAG主机连接多个JTAG从机</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.0.0.2.2.</span> <span class="nav-text">图2 TAP状态机</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-RISC-V调试Spec"><span class="nav-number">1.1.</span> <span class="nav-text">2.RISC-V调试Spec</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.0.0.1.</span> <span class="nav-text">图3 RISC-V调试系统框架</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1DTM模块"><span class="nav-number">1.1.1.</span> <span class="nav-text">2.1DTM模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.1.0.1.</span> <span class="nav-text">图4 DTM寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-IDCODE寄存器-0x01"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">2.1.1 IDCODE寄存器(0x01)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">图5 IDCODE寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-DTM控制和状态寄存器-dtmcs，0x10"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">2.1.2 DTM控制和状态寄存器(dtmcs，0x10)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">图6 dtmcs寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-DM模块接口访问寄存器-dmi，0x11"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">2.1.3 DM模块接口访问寄存器(dmi，0x11)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.1.3.1.</span> <span class="nav-text">图7 dmi寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-4-BYPASS寄存器-0x1f"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">2.1.4 BYPASS寄存器(0x1f)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2DM模块"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.2DM模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.0.1.</span> <span class="nav-text">图8 DM寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-data寄存器-data0data11，0x040x0f"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">2.2.1 data寄存器(data0data11，0x040x0f)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-DM控制寄存器-dmcontrol，0x10"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">2.2.2 DM控制寄存器(dmcontrol，0x10)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">图9 dmcontrol寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-DM状态寄存器-dmstatus，0x11"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">2.2.3 DM状态寄存器(dmstatus，0x11)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.3.1.</span> <span class="nav-text">图10 dmstatus寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-abstract控制和状态寄存器-abstractcs，0x16"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">2.2.4 abstract控制和状态寄存器(abstractcs，0x16)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.4.1.</span> <span class="nav-text">图11 abstractcs寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-5-abstract命令寄存器-command，0x17"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">2.2.5 abstract命令寄存器(command，0x17)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.5.1.</span> <span class="nav-text">图12 command寄存器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.5.2.</span> <span class="nav-text">图13 访问寄存器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.5.3.</span> <span class="nav-text">图14 arg对应的data寄存器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.5.4.</span> <span class="nav-text">图15 快速访问</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.5.5.</span> <span class="nav-text">图16 访问内存</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-6-系统总线访问控制和状态寄存器-sbcs，0x38"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">2.2.6 系统总线访问控制和状态寄存器(sbcs，0x38)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.1.2.6.1.</span> <span class="nav-text">图17 sbcs寄存器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-7-系统总线地址0寄存器-sbaddress0，0x39"><span class="nav-number">1.1.2.7.</span> <span class="nav-text">2.2.7 系统总线地址0寄存器(sbaddress0，0x39)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-8-系统总线数据0寄存器-sbdata0，0x3c"><span class="nav-number">1.1.2.8.</span> <span class="nav-text">2.2.8 系统总线数据0寄存器(sbdata0，0x3c)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-RISC-V调试上位机分析"><span class="nav-number">1.2.</span> <span class="nav-text">3.RISC-V调试上位机分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-openocd启动过程"><span class="nav-number">1.2.1.</span> <span class="nav-text">3.1 openocd启动过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.2.1.0.1.</span> <span class="nav-text">图18 openocd启动流程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-read-register过程"><span class="nav-number">1.2.2.</span> <span class="nav-text">3.2 read register过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-write-register过程"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.3 write register过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-read-memory过程"><span class="nav-number">1.2.4.</span> <span class="nav-text">3.4 read memory过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-write-memory过程"><span class="nav-number">1.2.5.</span> <span class="nav-text">3.5 write memory过程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-RISC-V-JTAG的实现"><span class="nav-number">1.3.</span> <span class="nav-text">4.RISC-V JTAG的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#"><span class="nav-number">1.3.0.0.1.</span> <span class="nav-text">图19 JTAG实现的程序流程</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
