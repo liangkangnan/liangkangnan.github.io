@@ -27,30 +27,30 @@
 <meta property="og:site_name" content="liangkangnan的博客">
 <meta property="og:description" content="1.JTAG简介目前RISC-V官方支持的调试方式是JTAG(Joint Test Action Group)，而ARM支持的调试方式有JTAG和SWD(Serial Wire Debug)这两种。 JTAG是一种国际标准的调试方式(IEEE1149.1)，而SWD是ARM开发的。 标准JTAG采用四线方式，分别是TCK、TMS、TDI和TDO，有一个可选的TRST引脚。  TCK：测试时钟输入。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/chain.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/TAP.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/system.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/DTM.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/idcode.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/dtmcs.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/dmi.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/DM.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/dmcontrol.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/dmstatus.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/abstractcs.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/command.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/cmd0.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/arg_data.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/cmd1.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/cmd2.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/sbcs.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/openocd.png">
-<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/jtag_sx.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/chain.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/TAP.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/system.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/DTM.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/idcode.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dtmcs.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dmi.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/DM.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dmcontrol.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/dmstatus.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/abstractcs.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/command.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/cmd0.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/arg_data.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/cmd1.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/cmd2.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/sbcs.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/openocd.png">
+<meta property="og:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/jtag_sx.png">
 <meta property="article:published_time" content="2020-03-15T13:39:45.500Z">
-<meta property="article:modified_time" content="2020-03-15T13:38:22.033Z">
+<meta property="article:modified_time" content="2020-03-20T13:14:52.918Z">
 <meta property="article:author" content="liangkangnan">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/images/chain.png">
+<meta name="twitter:image" content="http://yoursite.com/2020/03/15/deep-in-riscv-debug/chain.png">
 
 <link rel="canonical" href="http://yoursite.com/2020/03/15/deep-in-riscv-debug/">
 
@@ -197,10 +197,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-03-15 21:39:45 / 修改时间：21:38:22" itemprop="dateCreated datePublished" datetime="2020-03-15T21:39:45+08:00">2020-03-15</time>
+              <time title="创建时间：2020-03-15 21:39:45" itemprop="dateCreated datePublished" datetime="2020-03-15T21:39:45+08:00">2020-03-15</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-20 21:14:52" itemprop="dateModified" datetime="2020-03-20T21:14:52+08:00">2020-03-20</time>
+              </span>
 
           
             <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
@@ -235,11 +241,11 @@
 </ul>
 <p>在调试时需要用到一个工具，比如JLink或者CMSIS-DAP，对于这个工具，在这里称为JTAG主机(JTAG host)，而嵌入在芯片内部的JTAG称为JTAG从机(JTAG slave)，需要注意的是上面这些信号的输入输出方向是对于JTAG从机来说的。下文中如无特别说明，JTAG都是指JTAG从机。</p>
 <p>一个JTAG主机可以同时对多个JTAG从机进行调试，这通过JTAG扫描链(JTAG Scan Chain)完成，如图1所示。</p>
-<img src="./images/chain.png" alt="图1" style="zoom:50%;">
+<img src="/2020/03/15/deep-in-riscv-debug/chain.png" alt="图1" style="zoom:50%;">
 
 <p>图1 一个JTAG主机连接多个JTAG从机</p>
 <p>JTAG内部有一个TAP(Test Access Port)控制器(或者说状态机)，通过TCK和TMS信号来改变状态机的状态。这个状态机的核心是两路SCAN，分别是IR SCAN和DR SCAN，TAP状态机如图2所示。</p>
-<p><img src="./images/TAP.png" alt="图2"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/TAP.png" alt="图2"></p>
 <p>图2 TAP状态机</p>
 <p>箭头上的0或1表示的是TMS信号的电平。JTAG在每一个TCK信号的上升沿采样TMS信号和TDI信号，决定状态机的状态是否发生变化，在每一个TCK信号的下降沿输出TDO信号。可以看到，无论TAP目前处于哪一个状态，只要TMS保持高电平并持续5个TCK时钟，则TAP一定会回到Test-Logic-Reset状态。</p>
 <p>JTAG内部有一个IR(instruction register)寄存器和多个DR(data register)寄存器，IR寄存器决定要访问的是哪一个DR寄存器。DR寄存器有IDCODE、BYPASS等。在Test-Logic-Reset状态下IR寄存器默认选择的是IDCODE这个DR寄存器。</p>
@@ -247,16 +253,16 @@
 <h2 id="2-RISC-V调试Spec"><a href="#2-RISC-V调试Spec" class="headerlink" title="2.RISC-V调试Spec"></a>2.RISC-V调试Spec</h2><p>调试模块在CPU芯片设计里是最为不起眼的，但又是最为复杂的模块之一，大部分开源的处理器IP都没有调试模块。</p>
 <p>下面的内容基于RISC-V debug spec 0.13版本。</p>
 <p>目前RISC-V的官方调试上位机是openocd，调试工具可以是JLink或者CMSIS-DAP，RISC-V调试系统框架如图3所示。</p>
-<img src="./images/system.png" alt="图3" style="zoom:50%;">
+<img src="/2020/03/15/deep-in-riscv-debug/system.png" alt="图3" style="zoom:50%;">
 
 <p>图3 RISC-V调试系统框架</p>
 <p>可以看到主要分为3个部分，分别是Debug Host，可以理解为PC；Debug Hardware，可以理解为JLink或者CMSIS-DAP这样的调试工具；第三部分就是嵌入在芯片内部的调试模块。在调试模块内部，与调试工具直接交互的是DTM模块，DTM模块通过DMI接口与DM模块交互。</p>
 <h3 id="2-1DTM模块"><a href="#2-1DTM模块" class="headerlink" title="2.1DTM模块"></a>2.1DTM模块</h3><p>在DTM模块里实现了一个TAP控制器(状态机)，其中IR寄存器的长度最少为5位，当TAP控制器复位时，IR的值默认为5’b00001，即选择的是IDCODE寄存器。DTM模块的寄存器(DR寄存器)定义如图4所示。</p>
-<p><img src="./images/DTM.png" alt="图4"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/DTM.png" alt="图4"></p>
 <p>图4 DTM寄存器</p>
 <p>其中红色框起来的寄存器是必须要实现的。下面简单介绍一下这几个寄存器。</p>
 <h4 id="2-1-1-IDCODE寄存器-0x01"><a href="#2-1-1-IDCODE寄存器-0x01" class="headerlink" title="2.1.1 IDCODE寄存器(0x01)"></a>2.1.1 IDCODE寄存器(0x01)</h4><p>当TAP状态机复位时，IR寄存器的值默认为0x01，即选择的是IDCODE寄存器。IDCODE寄存器的每一位含义如图5所示。IDCODE是只读寄存器。</p>
-<p><img src="./images/idcode.png" alt="图5"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/idcode.png" alt="图5"></p>
 <p>图5 IDCODE寄存器</p>
 <ul>
 <li><p>Version：只读，版本号，可为任意值。</p>
@@ -267,7 +273,7 @@
 </li>
 </ul>
 <h4 id="2-1-2-DTM控制和状态寄存器-dtmcs，0x10"><a href="#2-1-2-DTM控制和状态寄存器-dtmcs，0x10" class="headerlink" title="2.1.2 DTM控制和状态寄存器(dtmcs，0x10)"></a>2.1.2 DTM控制和状态寄存器(dtmcs，0x10)</h4><p>dtmcs寄存器的每一位含义如图6所示。</p>
-<p><img src="./images/dtmcs.png" alt="图6"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/dtmcs.png" alt="图6"></p>
 <p>图6 dtmcs寄存器</p>
 <ul>
 <li><p>dmihardreset：DTM模块硬复位，写1有效。</p>
@@ -284,7 +290,7 @@
 </li>
 </ul>
 <h4 id="2-1-3-DM模块接口访问寄存器-dmi，0x11"><a href="#2-1-3-DM模块接口访问寄存器-dmi，0x11" class="headerlink" title="2.1.3 DM模块接口访问寄存器(dmi，0x11)"></a>2.1.3 DM模块接口访问寄存器(dmi，0x11)</h4><p>dmi寄存器的每一位含义如图7所示。</p>
-<p><img src="./images/dmi.png" alt="图7"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/dmi.png" alt="图7"></p>
 <p>图7 dmi寄存器</p>
 <ul>
 <li><p>address：可读可写，DM寄存器的长度(位数)。</p>
@@ -298,12 +304,12 @@
 <h4 id="2-1-4-BYPASS寄存器-0x1f"><a href="#2-1-4-BYPASS寄存器-0x1f" class="headerlink" title="2.1.4 BYPASS寄存器(0x1f)"></a>2.1.4 BYPASS寄存器(0x1f)</h4><p>只读，长度为1，值固定为0。</p>
 <h3 id="2-2DM模块"><a href="#2-2DM模块" class="headerlink" title="2.2DM模块"></a>2.2DM模块</h3><p>从图3可知，DM模块访问RISC-V Core有两种方式，一种是通过abstract command，另一种是通过system bus。abstract command方式是必须要实现的，system bus的方式是可选的。</p>
 <p>DM模块的寄存器都为32位，定义如图8所示。</p>
-<p><img src="./images/DM.png" alt="图8"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/DM.png" alt="图8"></p>
 <p>图8 DM寄存器</p>
 <p>下面介绍一下红色框起来这几个重要的寄存器。</p>
 <h4 id="2-2-1-data寄存器-data0-data11，0x04-0x0f"><a href="#2-2-1-data寄存器-data0-data11，0x04-0x0f" class="headerlink" title="2.2.1 data寄存器(data0~data11，0x04~0x0f)"></a>2.2.1 data寄存器(data0~data11，0x04~0x0f)</h4><p>这12个寄存器是用于abstract command的数据寄存器，长度为32位，可读可写。</p>
 <h4 id="2-2-2-DM控制寄存器-dmcontrol，0x10"><a href="#2-2-2-DM控制寄存器-dmcontrol，0x10" class="headerlink" title="2.2.2 DM控制寄存器(dmcontrol，0x10)"></a>2.2.2 DM控制寄存器(dmcontrol，0x10)</h4><p>dmcontrol寄存器的每一位含义如图9所示。</p>
-<p><img src="./images/dmcontrol.png" alt="图9"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/dmcontrol.png" alt="图9"></p>
 <p>图9 dmcontrol寄存器</p>
 <ul>
 <li><p>haltreq：只写，写1表示halt(暂停)当前hart(hart表示CPU核，存在多核的情况)。</p>
@@ -330,7 +336,7 @@
 </li>
 </ul>
 <h4 id="2-2-3-DM状态寄存器-dmstatus，0x11"><a href="#2-2-3-DM状态寄存器-dmstatus，0x11" class="headerlink" title="2.2.3 DM状态寄存器(dmstatus，0x11)"></a>2.2.3 DM状态寄存器(dmstatus，0x11)</h4><p>dmstatus寄存器是一个只读寄存器，每一位含义如图10所示。</p>
-<p><img src="./images/dmstatus.png" alt="图10"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/dmstatus.png" alt="图10"></p>
 <p>图10 dmstatus寄存器</p>
 <ul>
 <li><p>impebreak：1表示执行完progbuf的指令后自动插入一条ebreak指令，这样就可以节省一个progbuf。当progbufsize的值为1时，此值必须为1。</p>
@@ -371,7 +377,7 @@
 </li>
 </ul>
 <h4 id="2-2-4-abstract控制和状态寄存器-abstractcs，0x16"><a href="#2-2-4-abstract控制和状态寄存器-abstractcs，0x16" class="headerlink" title="2.2.4 abstract控制和状态寄存器(abstractcs，0x16)"></a>2.2.4 abstract控制和状态寄存器(abstractcs，0x16)</h4><p>abstractcs寄存器定义如图11所示。</p>
-<p><img src="./images/abstractcs.png" alt="图11"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/abstractcs.png" alt="图11"></p>
 <p>图11 abstractcs寄存器</p>
 <ul>
 <li><p>progbufsize：只读，program buffer的个数，取值范围为0~16，每一个的大小为32位。</p>
@@ -384,7 +390,7 @@
 </li>
 </ul>
 <h4 id="2-2-5-abstract命令寄存器-command，0x17"><a href="#2-2-5-abstract命令寄存器-command，0x17" class="headerlink" title="2.2.5 abstract命令寄存器(command，0x17)"></a>2.2.5 abstract命令寄存器(command，0x17)</h4><p>当写这个寄存器时，相应的操作就会被执行。command寄存器只能写，定义如图12所示。</p>
-<p><img src="./images/command.png" alt="图12"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/command.png" alt="图12"></p>
 <p>图12 command寄存器</p>
 <ul>
 <li><p>cmdtype：只写，命令类型，0为表示访问寄存器，1表示快速访问，2表示访问内存。</p>
@@ -393,7 +399,7 @@
 </li>
 </ul>
 <p>当cmdtype为0时，control定义如图13所示。</p>
-<p><img src="./images/cmd0.png" alt="图13"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/cmd0.png" alt="图13"></p>
 <p>图13 访问寄存器</p>
 <ul>
 <li><p>cmdtype：值为0。</p>
@@ -423,11 +429,11 @@
 </li>
 </ol>
 <p>arg对应的data寄存器如图14所示。</p>
-<p><img src="./images/arg_data.png" alt="图14"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/arg_data.png" alt="图14"></p>
 <p>图14 arg对应的data寄存器</p>
 <p>即当访问的寄存器位数为32位时，arg0对应data0寄存器，arg1对应data1寄存器，arg2对应data2寄存器。</p>
 <p>当cmdtype为1时，control定义如图15所示。</p>
-<p><img src="./images/cmd1.png" alt="图15"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/cmd1.png" alt="图15"></p>
 <p>图15 快速访问</p>
 <ul>
 <li>cmdtyte：值为1。</li>
@@ -442,7 +448,7 @@
 </li>
 </ol>
 <p>当cmdtype为2时，control定义如图16所示。</p>
-<p><img src="./images/cmd2.png" alt="图16"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/cmd2.png" alt="图16"></p>
 <p>图16 访问内存</p>
 <ul>
 <li><p>cmdtype：值为2。</p>
@@ -468,7 +474,7 @@
 </li>
 </ol>
 <h4 id="2-2-6-系统总线访问控制和状态寄存器-sbcs，0x38"><a href="#2-2-6-系统总线访问控制和状态寄存器-sbcs，0x38" class="headerlink" title="2.2.6 系统总线访问控制和状态寄存器(sbcs，0x38)"></a>2.2.6 系统总线访问控制和状态寄存器(sbcs，0x38)</h4><p>sbcs寄存器定义如图17所示。</p>
-<p><img src="./images/sbcs.png" alt="图17"></p>
+<p><img src="/2020/03/15/deep-in-riscv-debug/sbcs.png" alt="图17"></p>
 <p>图17 sbcs寄存器</p>
 <ul>
 <li><p>sbversion：只读，0表示system bus是2018.1.1之前的版本，1表示当前debug spec的版本，即0.13版本。</p>
@@ -563,7 +569,7 @@
 </li>
 </ul>
 <p>openocd启动时的主要流程如图18所示。</p>
-<img src="./images/openocd.png" alt="图18" style="zoom:40%;">
+<img src="/2020/03/15/deep-in-riscv-debug/openocd.png" alt="图18" style="zoom:40%;">
 
 <p>图18 openocd启动流程</p>
 <p>下面重点关注一下examine target这个流程。</p>
@@ -576,11 +582,11 @@
 <p>先将要写的内存地址写到sbaddress0寄存器，然后将要写的数据写到data0寄存器，最后读sbcs寄存器，如果其中的sbbusy、sberror和sbbusyerror都为0，则此次写内存成功。</p>
 <h2 id="4-RISC-V-JTAG的实现"><a href="#4-RISC-V-JTAG的实现" class="headerlink" title="4.RISC-V JTAG的实现"></a>4.RISC-V JTAG的实现</h2><p>通过在STM32F103C8T6上实现(模拟)RISC-V调试标准，进一步加深对RISC-V JTAG调试的理解。</p>
 <p>使用STM32的四个GPIO作为JTAG信号的四根线，其中TCK所在的引脚设为外部中断，即上升沿和下降沿触发方式，实现了可以通过openocd以RISC-V的调试标准来访问STM32的寄存器和内存。程序流程如图19所示，完整的工程代码见[2]。verilog的实现见[3]。</p>
-<img src="./images/jtag_sx.png" alt="图19" style="zoom:50%;">
+<img src="/2020/03/15/deep-in-riscv-debug/jtag_sx.png" alt="图19" style="zoom:50%;">
 
 <p>图19 JTAG实现的程序流程</p>
 <h2 id="5-参考资料"><a href="#5-参考资料" class="headerlink" title="5.参考资料"></a>5.参考资料</h2><ol>
-<li><p>RISC-V External Debug Support Version 0.13-DRAFT(f2873e71b728cb65dceb6605a05c147b752e257c)。</p>
+<li><p>RISC-V External Debug Support Version 0.13。</p>
 </li>
 <li><p>在STM32上模拟RISC-V JTAG的实现：<a href="https://gitee.com/liangkangnan/stm32_riscv_jtag_slave" target="_blank" rel="noopener">stm32_riscv_jtag_slave</a>。</p>
 </li>
